@@ -8,7 +8,7 @@ class StringCalculator {
         if (numbers) {
             def numbersList = stringCalculatorParser.convertNumbersStringToList(numbers)
             sum = sumListOfNumbers(numbersList)
-            raiseExceptionIfNegativeNumbers(numbersList)
+            checkForNegativeNumbers(numbersList)
         }
         sum
     }
@@ -17,7 +17,7 @@ class StringCalculator {
         numbersList.collect { (it in (0..MAX_OPERATOR)) ? it : 0 }.sum()
     }
 
-    private raiseExceptionIfNegativeNumbers(numbersList) {
+    private checkForNegativeNumbers(numbersList) {
         def negativeNumbers = numbersList.findAll { it < 0 }
         if (negativeNumbers) {
             throw new NegativeNumberException("negatives not allowed: ${negativeNumbers}")
