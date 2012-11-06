@@ -6,7 +6,7 @@ class PrimeFactorsSpec extends Specification {
     def setupSpec()
     {
         Integer.metaClass.getPrimeFactors = { ->
-            (1..delegate).inject([]) { list, it -> (delegate % it == 0) ? list << it: list }
+            (1..delegate).inject([]) { list, it -> (delegate % it == 0) ? list << it : list }
         }
     }
 
