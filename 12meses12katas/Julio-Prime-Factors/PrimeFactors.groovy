@@ -3,13 +3,17 @@ import spock.lang.Specification
 
 class PrimeFactorsSpec extends Specification {
 
+    def setupSpec()
+    {
+        Integer.metaClass.getPrimeFactors = { ->
+            (1..delegate).inject([]) { list, it -> (delegate % it == 0) ? list << it: list }
+        }
+    }
+
     @Unroll
     def "return the prime factors for a given number"() {
-        given:
-        def primeFactors = new PrimeFactors()
-
         expect:
-        primeFactors.calculatePrimeFactors(number) == expectedPrimeFactors
+        number.primeFactors == expectedPrimeFactors
 
         where:
         number  | expectedPrimeFactors
@@ -23,11 +27,5 @@ class PrimeFactorsSpec extends Specification {
         8       | [1, 2, 4, 8]
         9       | [1, 3, 9]
         10      | [1, 2, 5, 10]
-    }
-}
-
-class PrimeFactors {
-    def calculatePrimeFactors(number) {
-        (1..number).inject([]) { list, it -> (number % it == 0) ? list << it: list }
     }
 }
