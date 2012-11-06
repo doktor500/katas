@@ -1,19 +1,18 @@
 import spock.lang.Unroll
 import spock.lang.Specification
 
-class PrimeFactorsSpec extends Specification
-{
+class PrimeFactorsSpec extends Specification {
+
     @Unroll
-    def "return the prime factors for a given number"()
-    {
+    def "return the prime factors for a given number"() {
         given:
         def primeFactors = new PrimeFactors()
 
         expect:
-        primeFactors.calculatePrimeFactors(number) == expectedFactors
+        primeFactors.calculatePrimeFactors(number) == expectedPrimeFactors
 
         where:
-        number  | expectedFactors
+        number  | expectedPrimeFactors
         1       | [1]
         2       | [1, 2]
         3       | [1, 3]
